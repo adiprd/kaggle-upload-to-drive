@@ -1,22 +1,26 @@
-README – Single-Folder Google Drive Uploader (Colab)
+---
 
-This script automatically uploads all files inside a local folder (e.g., runs/rfdetr_nano_traffic) into a single folder in Google Drive (MyDrive).
+# **README – Single-Folder Google Drive Uploader (Colab)**
+
+This script automatically uploads **all files inside a local folder** (e.g., `runs/rfdetr_nano_traffic`) into a **single folder in Google Drive (MyDrive)**.
 It is designed for Google Colab and uses OAuth authentication (no Service Account required).
 
-Features
+---
 
-Automatically authenticates with your Google account via Colab.
+## **Features**
 
-Ensures the upload target folder is created directly inside MyDrive/root.
+* Automatically authenticates with your Google account via Colab.
+* Ensures the upload target folder is created **directly inside MyDrive/root**.
+* Enforces a flat structure: **no subfolders** are uploaded.
+* All files are uploaded into one Google Drive folder.
 
-Enforces a flat structure: no subfolders are uploaded.
+---
 
-All files are uploaded into one Google Drive folder.
-
-Folder Structure
+## **Folder Structure**
 
 Local folder (example):
 
+```
 runs/
 └── rfdetr_nano_traffic/
     ├── checkpoint.pth
@@ -26,10 +30,11 @@ runs/
     ├── results.json
     ├── metrics_plot.png
     └── events.out.tfevents...
-
+```
 
 Google Drive output:
 
+```
 MyDrive/
 └── kaggle-upload/
     ├── checkpoint.pth
@@ -39,12 +44,17 @@ MyDrive/
     ├── results.json
     ├── metrics_plot.png
     └── events.out.tfevents...
+```
 
-Usage in Google Colab
-1. Copy the script
+---
+
+## **Usage in Google Colab**
+
+### **1. Copy the script**
 
 Paste the following Python script into a Colab cell:
 
+```python
 # ============================================================
 # FORCE ALL FILES INTO A SINGLE FOLDER IN MYDRIVE
 # ============================================================
@@ -98,29 +108,28 @@ for file in os.listdir(LOCAL_FOLDER):
         upload_file(filepath, TARGET_ID)
 
 print("\nDONE — all files now inside:  MyDrive /", TARGET_FOLDER_NAME)
+```
 
-2. Run the script
+---
 
-Colab will ask for Google login.
+### **2. Run the script**
 
-Authorize the requested permissions.
+* Colab will ask for Google login.
+* Authorize the requested permissions.
+* All files will upload to:
 
-All files will upload to:
-
+```
 MyDrive / kaggle-upload
+```
 
-Requirements
+---
 
-Google Colab environment
+## **Requirements**
 
-googleapiclient library (already available in Colab)
+* Google Colab environment
+* `googleapiclient` library (already available in Colab)
+* Google Drive API enabled internally by Colab (no manual setup needed)
 
-Google Drive API enabled internally by Colab (no manual setup needed)
+---
 
-Notes
-
-This uploader does not include subfolders; only files are uploaded.
-
-If the target folder already exists in MyDrive, it will be reused automatically.
-
-The script avoids service accounts to ensure files go directly to your Drive, not a shared or quota-restricted drive.
+If you want a **version with subfolder preservation**, **progress bars**, or **multi-threaded upload**, I can generate those too.
